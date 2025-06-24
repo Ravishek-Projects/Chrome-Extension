@@ -1,0 +1,12 @@
+
+
+# Log files
+*.log
+
+# Build output 
+dist/
+build/
+
+# Environment files
+.env
+.env.local
