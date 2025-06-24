@@ -1,4 +1,4 @@
-const AZ_PROBLEM_KEY = "AZ_PROBLEM_KEY";
+const PROBLEM_KEY = "PROBLEM_KEY";
 
 const assetsURLMap = {
     "play": chrome.runtime.getURL("assets/play.png"),
@@ -9,8 +9,8 @@ const assetsURLMap = {
 const bookmarkSection = document.getElementById("bookmarks");
 
 document.addEventListener("DOMContentLoaded", () => {
-    chrome.storage.sync.get([AZ_PROBLEM_KEY], (data) => {
-        const currentBookmarks = data[AZ_PROBLEM_KEY] || [];
+    chrome.storage.sync.get([PROBLEM_KEY], (data) => {
+        const currentBookmarks = data[PROBLEM_KEY] || [];
         viewBookmarks(currentBookmarks);
     });
 });
@@ -71,9 +71,9 @@ function onDelete(event){
 }
 
 function deleteItemFromStorage(idToRemove){
-    chrome.storage.sync.get([AZ_PROBLEM_KEY], (data) => {
-        const currentBookmarks = data[AZ_PROBLEM_KEY] || [];
+    chrome.storage.sync.get([PROBLEM_KEY], (data) => {
+        const currentBookmarks = data[PROBLEM_KEY] || [];
         const updatedBookmarks = currentBookmarks.filter((bookmark) => bookmark.id !== idToRemove);
-        chrome.storage.sync.set({AZ_PROBLEM_KEY : updatedBookmarks});
+        chrome.storage.sync.set({PROBLEM_KEY : updatedBookmarks});
     })
 }
