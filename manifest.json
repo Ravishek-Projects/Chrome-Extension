@@ -3,7 +3,7 @@
   "name": "Your Problem Tracker",
   "version": "0.1",
   "author": "Ravishek Kumar",
-  "description": "A Chrome Extension that helps us track problems on AZ",
+  "description": "A Chrome Extension that helps us track problems on maang.in, LeetCode, codechef, codeforces and other competitive programming platforms.",
   "permissions": [
     "storage",
     "tabs"
@@ -45,6 +45,6 @@
       "32": "assets/ext-icon.png"
     },
     "default_popup": "popup.html",
-    "default_title": "AZ Problem Tracker"
+    "default_title": "Problem Tracker"
   }
 }
