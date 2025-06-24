@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "AZ Problem Tracker",
+  "name": "Your Problem Tracker",
   "version": "0.1",
   "author": "Ravishek Kumar",
   "description": "A Chrome Extension that helps us track problems on AZ",
@@ -15,9 +15,9 @@
         "https://leetcode.com/*",
         "https://www.hackerrank.com/*",
         "https://www.codechef.com/*",
-        "https://www.codeforces.com/*",
+        "https://codeforces.com/*",
         "https://www.atcoder.jp/*",
-        "https://www.codingninjas.com/*",
+        "https://*.codingninjas.com/*",
         "https://www.interviewbit.com/*"
       ],
       "js": [

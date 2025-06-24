@@ -9,10 +9,26 @@ observer.observe(document.body, {childList: true, subtree: true});
 
 addBookmarkButton();
 
-function onProblemsPage(){
-    return window.location.pathname.startsWith('/problems/');
+function onProblemsPage() {
+  return /problem|challenge|task/i.test(window.location.href);
 }
-
+                          
+function getFirstMatchingElementByClass(classNames) {
+  for (let className of classNames) {
+    const el = document.querySelector(className);
+    if (el) return el;
+  }
+  return null;
+}
+function getFirstMatchingElementById(idList) {
+  for (let id of idList) {
+    const el = document.getElementById(id);
+    if (el) return el;
+  }
+  return null;
+}
+  
+  
 function addBookmarkButton() {
     console.log("Trigerring");
     if(!onProblemsPage() || document.getElementById("add-bookmark-button")) return;
@@ -23,26 +39,58 @@ function addBookmarkButton() {
     bookmarkButton.style.height = "30px";
     bookmarkButton.style.width = "30px";
 
-    const askDoubtButton = document.getElementsByClassName("coding_ask_doubt_button__FjwXJ")[0];
+    const askDoubtButton = getFirstMatchingElementByClass([
+      ".time-limit",
+      ".coding_problem_info_heading__G9ueL",
+      ".problem-statement",
+      ".title",
+      ".text-title-large",
+      ".problem-statement",
+
+      ".property-title",
+      "._problem-statement__inner__container_1gdez_109 .notranslate + h3",
+    ]);
+      
+
+      if (!askDoubtButton) {
+        
+        console.warn("No matching element found for askDoubtButton");
+        return;
+      }
 
     askDoubtButton.parentNode.insertAdjacentElement("afterend", bookmarkButton);
 
     bookmarkButton.addEventListener("click", addNewBookmarkHandler);
 }
-
+function getProblemNameFromClasses(classList) {
+  for (const className of classList) {
+    const element = document.querySelector(className);
+    if (element) return element.innerText;
+  }
+  return "Unknown Problem";
+}
+  
 async function addNewBookmarkHandler() {
     const currentBookmarks = await getCurrentBookmarks();
 
-    const azProblemUrl = window.location.href;
-    const uniqueId = extractUniqueId(azProblemUrl);
-    const problemName = document.getElementsByClassName("Header_resource_heading__cpRp1")[0].innerText;
+    const ProblemUrl = window.location.href;
+    const uniqueId = extractUniqueId(ProblemUrl);
+    const problemName = getProblemNameFromClasses([
+      ".Header_resource_heading__cpRp1",
+      ".problem-title",
+      ".text-title-large .no-underline",
+      ".heading",
+      ".problem-statement .title",
+      "._problem-statement__inner__container_1gdez_109 .notranslate + h3",
+    ]);
+      
 
     if(currentBookmarks.some((bookmark) => bookmark.id === uniqueId)) return;
 
     const bookmarkObj = {
         id: uniqueId,
         name: problemName,
-        url: azProblemUrl
+        url: ProblemUrl
     }
 
     const updatedBookmarks = [...currentBookmarks, bookmarkObj];
@@ -52,9 +100,9 @@ async function addNewBookmarkHandler() {
     })
 }
 function extractUniqueId(url) {
-    const start = url.indexOf("problems/") + "problems/".length;
-    const end = url.indexOf("?", start);
-    return end === -1 ? url.substring(start) : url.substring(start, end);
+    // const start = url.indexOf("problems/") + "problems/".length;
+    // const end = url.indexOf("?", start);
+    return url;
 }
 
 function getCurrentBookmarks() {
