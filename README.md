@@ -8,9 +8,8 @@ This is a basic Chrome Extension base template for starting new projects off of 
 
 ## Author
 First Last
-- [Author Website]()
-- [Author Github]()
-- [Project Repository]()
+- [Author Github](https://github.com/Ravishek-Projects)
+- [Project Repository](https://github.com/Ravishek-Projects/Chrome-Extension)
 
 ## Requirements
 ### Knowledge
