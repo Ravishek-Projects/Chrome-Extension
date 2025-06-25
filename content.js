@@ -20,13 +20,6 @@ function getFirstMatchingElementByClass(classNames) {
   }
   return null;
 }
-function getFirstMatchingElementById(idList) {
-  for (let id of idList) {
-    const el = document.getElementById(id);
-    if (el) return el;
-  }
-  return null;
-}
   
   
 function addBookmarkButton() {
